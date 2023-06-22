@@ -35,10 +35,11 @@ class MowerRemoteCommand extends Command
         $outputStyle = new OutputFormatterStyle('red', 'black', ['bold']);
         $output->getFormatter()->setStyle('error', $outputStyle);
 
-        $this->mowerRemoteHandler->__invoke($input->getArgument('file'));
+        $response = $this->mowerRemoteHandler->__invoke($input->getArgument('file'));
 
-        dd($rawOrders);
-        $output->writeln('1 3 N\n5 1 E');
+        foreach ($response->read() as $item) {
+            $output->writeln($item);
+        }
 
         return Command::SUCCESS;
     }
