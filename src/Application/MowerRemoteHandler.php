@@ -16,9 +16,7 @@ class MowerRemoteHandler
         $orders = $this->mowersRepository->findOrders($file);
 
         foreach ($orders->mowers() as $mower) {
-            foreach ($mower->movements()->items() as $movement) {
-                $mower->nextPosition($movement);
-            }
+            $mower->executeMovements();
         }
 
         return MowerRemotePresenter::write($orders);

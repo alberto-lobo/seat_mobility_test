@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Shared\Domain;
+namespace App\Domain;
+
+use App\Domain\Exceptions\NegativeCoordinatesException;
 
 class Coordinates
 {
     private function __construct(private int $x, private int $y)
     {
+        $this->validate();
     }
 
     public static function fromString(string $x, string $y): self
@@ -41,5 +44,12 @@ class Coordinates
     public function y(): int
     {
         return $this->y;
+    }
+
+    private function validate(): void
+    {
+        if ($this->x < 0 || $this->y < 0) {
+            throw NegativeCoordinatesException::withValues($this->x, $this->y);
+        }
     }
 }

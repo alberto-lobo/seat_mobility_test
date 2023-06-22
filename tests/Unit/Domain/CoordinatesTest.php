@@ -2,7 +2,7 @@
 
 namespace App\Tests\Shared\Domain;
 
-use App\Shared\Domain\Coordinates;
+use App\Domain\Coordinates;
 use PHPUnit\Framework\TestCase;
 
 class CoordinatesTest extends TestCase

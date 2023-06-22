@@ -19,9 +19,7 @@ class MowerRemotePresenter
     {
         $data = [];
         foreach ($this->orders->mowers() as $order) {
-            $data[] = [
-                $order->coordinates()->x() . " " . $order->coordinates()->y() . " " . $order->orientation()->value
-            ];
+            $data[] = $order->coordinates()->x() . " " . $order->coordinates()->y() . " " . $order->orientation()->value;
         }
         return $data;
     }

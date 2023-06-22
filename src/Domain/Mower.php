@@ -2,16 +2,15 @@
 
 namespace App\Domain;
 
-use App\Shared\Domain\Coordinates;
 use App\Shared\Domain\UuidGenerator;
 
 class Mower
 {
     private function __construct(
-        private string      $id,
-        private Coordinates $coordinates,
-        private Orientation $orientation,
-        private Movements   $movements
+        private string               $id,
+        private readonly Coordinates $coordinates,
+        private Orientation          $orientation,
+        private readonly Movements   $movements
     )
     {
     }
@@ -31,18 +30,20 @@ class Mower
         );
     }
 
-    public function nextPosition(Movement $movement): void
+    public function executeMovements(): void
     {
-        switch ($movement) {
-            case Movement::M:
-                $this->move();
-                return;
-            case Movement::L:
-                $this->rotateLeft();
-                return;
-            case Movement::R:
-                $this->rotateRight();
-                return;
+        foreach ($this->movements->items() as $movement) {
+            switch ($movement) {
+                case Movement::M:
+                    $this->move();
+                    break;
+                case Movement::L:
+                    $this->rotateLeft();
+                    break;
+                case Movement::R:
+                    $this->rotateRight();
+                    break;
+            }
         }
     }
 
@@ -51,16 +52,16 @@ class Mower
         switch ($this->orientation) {
             case Orientation::N:
                 $this->coordinates->moveToNorth();
-                return;
+                break;
             case Orientation::E:
                 $this->coordinates->moveToEast();
-                return;
+                break;
             case Orientation::S:
                 $this->coordinates->moveToSouth();
-                return;
+                break;
             case Orientation::W:
                 $this->coordinates->moveToWest();
-                return;
+                break;
         }
     }
 
@@ -69,16 +70,16 @@ class Mower
         switch ($this->orientation) {
             case Orientation::N:
                 $this->orientation = Orientation::E;
-                return;
+                break;
             case Orientation::E:
                 $this->orientation = Orientation::S;
-                return;
+                break;
             case Orientation::S:
                 $this->orientation = Orientation::W;
-                return;
+                break;
             case Orientation::W:
                 $this->orientation = Orientation::N;
-                return;
+                break;
         }
     }
 
@@ -108,10 +109,5 @@ class Mower
     public function orientation(): Orientation
     {
         return $this->orientation;
-    }
-
-    public function movements(): Movements
-    {
-        return $this->movements;
     }
 }

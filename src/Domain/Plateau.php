@@ -2,8 +2,6 @@
 
 namespace App\Domain;
 
-use App\Shared\Domain\Coordinates;
-
 class Plateau
 {
     private function __construct(private readonly Coordinates $coordinates)
