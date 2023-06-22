@@ -2,14 +2,14 @@
 
 namespace App\Domain;
 
+use App\Shared\Domain\Coordinates;
 use App\Shared\Domain\UuidGenerator;
 
 class Mower
 {
     private function __construct(
         private string      $id,
-        private string      $x,
-        private string      $y,
+        private Coordinates $coordinates,
         private Orientation $orientation,
         private Movements   $movements
     )
@@ -25,8 +25,7 @@ class Mower
     {
         return new static(
             UuidGenerator::uuidV4(),
-            $x,
-            $y,
+            Coordinates::fromString($x, $y),
             Orientation::build($orientation),
             Movements::fromArray($movements)
         );
