@@ -12,4 +12,34 @@ class Coordinates
     {
         return new static((int)$x, (int)$y);
     }
+
+    public function moveToNorth(): void
+    {
+        ++$this->y;
+    }
+
+    public function moveToEast(): void
+    {
+        ++$this->x;
+    }
+
+    public function moveToSouth(): void
+    {
+        --$this->y;
+    }
+
+    public function moveToWest(): void
+    {
+        --$this->x;
+    }
+
+    public function x(): int
+    {
+        return $this->x;
+    }
+
+    public function y(): int
+    {
+        return $this->y;
+    }
 }

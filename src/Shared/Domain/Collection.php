@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domain;
+namespace App\Shared\Domain;
 
 use App\Domain\Exceptions\InvalidCollectionObjectException;
 
@@ -21,6 +21,11 @@ abstract class Collection
     public static function build(array $items): self
     {
         return new static($items);
+    }
+
+    public function items(): array
+    {
+        return $this->items;
     }
 
     private function validateObjectType(array $items): void

@@ -2,6 +2,7 @@
 
 namespace App\Domain\DTO;
 
+use App\Domain\Mower;
 use App\Domain\Plateau;
 
 class Orders
@@ -16,5 +17,13 @@ class Orders
     public static function build(Plateau $plateauSize, array $mowers): self
     {
         return new static($plateauSize, $mowers);
+    }
+
+    /**
+     * @return Mower[]
+     */
+    public function mowers(): array
+    {
+        return $this->mowers;
     }
 }

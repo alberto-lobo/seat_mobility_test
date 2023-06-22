@@ -30,4 +30,88 @@ class Mower
             Movements::fromArray($movements)
         );
     }
+
+    public function nextPosition(Movement $movement): void
+    {
+        switch ($movement) {
+            case Movement::M:
+                $this->move();
+                return;
+            case Movement::L:
+                $this->rotateLeft();
+                return;
+            case Movement::R:
+                $this->rotateRight();
+                return;
+        }
+    }
+
+    private function move(): void
+    {
+        switch ($this->orientation) {
+            case Orientation::N:
+                $this->coordinates->moveToNorth();
+                return;
+            case Orientation::E:
+                $this->coordinates->moveToEast();
+                return;
+            case Orientation::S:
+                $this->coordinates->moveToSouth();
+                return;
+            case Orientation::W:
+                $this->coordinates->moveToWest();
+                return;
+        }
+    }
+
+    private function rotateRight(): void
+    {
+        switch ($this->orientation) {
+            case Orientation::N:
+                $this->orientation = Orientation::E;
+                return;
+            case Orientation::E:
+                $this->orientation = Orientation::S;
+                return;
+            case Orientation::S:
+                $this->orientation = Orientation::W;
+                return;
+            case Orientation::W:
+                $this->orientation = Orientation::N;
+                return;
+        }
+    }
+
+    private function rotateLeft(): void
+    {
+        switch ($this->orientation) {
+            case Orientation::N:
+                $this->orientation = Orientation::W;
+                return;
+            case Orientation::W:
+                $this->orientation = Orientation::S;
+                return;
+            case Orientation::S:
+                $this->orientation = Orientation::E;
+                return;
+            case Orientation::E:
+                $this->orientation = Orientation::N;
+                return;
+        }
+    }
+
+    public function coordinates(): Coordinates
+    {
+        return $this->coordinates;
+    }
+
+    public function orientation(): Orientation
+    {
+        return $this->orientation;
+    }
+
+    public function movements(): Movements
+    {
+        return $this->movements;
+    }
 }

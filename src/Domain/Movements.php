@@ -2,6 +2,8 @@
 
 namespace App\Domain;
 
+use App\Shared\Domain\Collection;
+
 class Movements extends Collection
 {
     protected function className(): string
