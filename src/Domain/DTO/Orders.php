@@ -26,4 +26,9 @@ class Orders
     {
         return $this->mowers;
     }
+
+    public function plateau(): Plateau
+    {
+        return $this->plateau;
+    }
 }
