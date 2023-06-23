@@ -2,6 +2,8 @@
 
 namespace App\Domain;
 
+use App\Domain\Exceptions\InvalidMovementException;
+
 enum Movement: string
 {
     case L = 'L';
@@ -11,9 +13,12 @@ enum Movement: string
     public static function build(string $value): self
     {
         $type = self::tryFrom($value);
-
         if (null === $type) {
-            throw new \DomainException(sprintf('Movement %s not valid. Only %s values are valid', $value, implode(',', self::cases())));
+            throw InvalidMovementException::withValues($value, implode(',', array_map(
+                    static fn(self $status) => $status->value,
+                    self::cases()
+                ))
+            );
         }
 
         return $type;

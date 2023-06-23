@@ -2,6 +2,7 @@
 
 namespace App\Tests\Acceptance\Infrastructure\Ui;
 
+use App\Domain\Exceptions\InvalidMovementException;
 use App\Domain\Exceptions\NegativeCoordinatesException;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -32,6 +33,19 @@ class MowerRemoteCommandTest extends KernelTestCase
         $commandTester = new CommandTester($command);
         $commandTester->execute([
             'file' => 'tests/InputWithNegativeCoordinates.txt'
+        ]);
+    }
+
+    public function testGivenInvalidCoordinatesShouldThrowInvalidMovementException(): void
+    {
+        $this->expectException(InvalidMovementException::class);
+        $kernel = self::bootKernel();
+        $application = new Application($kernel);
+
+        $command = $application->find('mower:send-movement');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([
+            'file' => 'tests/InputWithInvalidMovement.txt'
         ]);
     }
 }
