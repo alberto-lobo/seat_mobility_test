@@ -4,9 +4,7 @@ namespace App\Application;
 
 
 use App\Domain\Exceptions\MowerOutPlateauException;
-use App\Domain\Mower;
 use App\Domain\MowersRepository;
-use App\Domain\Plateau;
 
 class MowerRemoteHandler
 {

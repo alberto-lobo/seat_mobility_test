@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+    php:
+        build:
+            context: ./php
+            args:
+                TIMEZONE: ${TIMEZONE}
+        volumes:
+            - ../:/var/www/html:cached
+            - seat_mobility_test_var:/var/www/html/var
+            - seat_mobility_test_vendor:/var/www/html/vendor
+        networks:
+            - seat_mobility_test
+    nginx:
+        build:
+            context: ./nginx
+        volumes:
+            - ../:/var/www/html:cached
+            - seat_mobility_test_var:/var/www/html/var
+            - seat_mobility_test_vendor:/var/www/html/vendor
+        ports:
+            - 80:80
+        networks:
+            - seat_mobility_test
+        env_file:
+            - .env.nginx.local
+
+volumes:
+    seat_mobility_test_var:
+    seat_mobility_test_vendor:
+    db_app:
+
+networks:
+    seat_mobility_test:

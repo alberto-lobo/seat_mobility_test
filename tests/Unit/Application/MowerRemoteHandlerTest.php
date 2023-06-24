@@ -10,6 +10,7 @@ use PHPUnit\Framework\TestCase;
 class MowerRemoteHandlerTest extends TestCase
 {
     private MowerRemoteHandler $handler;
+
     protected function setUp(): void
     {
         $this->handler = new MowerRemoteHandler(new FileRepository());
