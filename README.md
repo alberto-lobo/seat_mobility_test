@@ -17,9 +17,7 @@ To install this project you will need a enviroment with:
 - Composer to install the package (https://getcomposer.org/)
 - PHPUnit https://phpunit.de/
 
-
 ## Installation
-
 
 Download the repository from github using
 ```bash
@@ -27,11 +25,11 @@ Download the repository from github using
 ```
 once the repository is downloaded you have to execute the command
 ```bash
-  composer install
+  make install
 ```
 To run the command to move the mowers execute, the file orders.txt has the movements for the mowers
 ```bash
-  bin/console mower:send-movement orders.txt
+  make execute
 ```
     
 ## Running Tests
@@ -39,7 +37,7 @@ To run the command to move the mowers execute, the file orders.txt has the movem
 To run tests, run the following command
 
 ```bash
-  bin/phpunit 
+  make tests
 ```
 
 ## Some assumtions
@@ -52,7 +50,3 @@ To run tests, run the following command
 ## Explications:
 - I decided to test from outside to inside because like that I dont have to test every single class that i already tests in the acceptance test
 - I decide to use the hexagonal architecture to separate every component 
-
-## next steps
-- WIP: add docker to execute application without install everythin on your systems. I had some problems with docker in my computer so I couldn't test if containers are up correctly.
-- Make file to simplify installation with just some commands
