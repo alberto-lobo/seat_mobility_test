@@ -37,7 +37,7 @@ To run the command to move the mowers execute, the file orders.txt has the movem
 To run tests, run the following command
 
 ```bash
-  make tests
+  make testing
 ```
 
 ## Some assumtions
