@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+    # phpmyadmin container
+    phpmyadmin:
+        image: phpmyadmin
+        container_name: seat_mobility_test_phpmyadmin
+        restart: always
+        ports:
+            - 8080:80
+        networks:
+            - seat_mobility_test
+
+    # Symfony apache project container
+    www:
+        build: docker/php
+        container_name: seat_mobility_test-php-fpm
+        ports:
+          - "8741:80"
+        volumes:
+            - ./docker/php/vhosts:/etc/apache2/sites-enabled
+            - ./:/var/www
+        restart: always
+        networks:
+            - seat_mobility_test
+
+networks:
+    seat_mobility_test:
